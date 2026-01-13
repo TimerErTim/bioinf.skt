@@ -1,0 +1,2 @@
+[tasks.compile]
+run = "typst compile main.typ Tim-Peko_OpenSourceSustainability.pdf"
