@@ -2,3 +2,9 @@
 run = [
     "typst compile main.typ SKT_TimPeko_OpenSourceSoftware.pdf",
 ]
+
+
+[tasks.compile-handout]
+run = [
+    "typst compile main.typ SKT_TimPeko_OpenSourceSoftware_Handout.pdf --input handout=true",
+]

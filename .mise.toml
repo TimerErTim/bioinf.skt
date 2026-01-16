@@ -1,7 +1,16 @@
 [tools]
-"cargo:hayagriva" = {version = "0.9.1", features = "cli"}
+"cargo:hayagriva" = { version = "0.9.1", features = "cli" }
 typst = "0.14.2"
 
 [env]
 TYPST_FONT_PATHS = "{{config_root}}/common/fonts"
 TYPST_ROOT = "{{config_root}}"
+
+[tasks.fmt]
+run = [
+    "mise run fmt:typ:*"
+]
+
+[tasks."fmt:typ:typst"]
+tools = { typstyle = "latest" }
+run = ["typstyle -i ./ --timing"]

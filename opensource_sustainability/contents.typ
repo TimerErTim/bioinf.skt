@@ -1,8 +1,20 @@
 #import "globals.typ": *
 
-#default-focus-slide(subheading: [
-  Open Source Anteil
-])[
+#default-focus-slide(
+  config: config-page(
+    background: [
+      #image("assets/phone.png")
+      #place(top + left, box(
+        fill: white.transparentize(25%),
+        width: 100%,
+        height: 100%,
+      ))
+    ],
+  ),
+  subheading: [
+    Open Source Anteil
+  ],
+)[
   #set text(size: 120pt)
   #pause
   70%
@@ -16,7 +28,8 @@
     #{
       show: box.with(stroke: (left: gray-0 + 1mm), inset: (left: 1cm))
       show text: upper
-      self.info.title; [\ ]
+      self.info.title
+      [\ ]
       set text(size: 24pt, weight: "regular")
       self.info.subtitle
     }
@@ -30,6 +43,17 @@
   ]
 ]))
 
+#let opensource-explain-title = "Was ist Open Source?"
+#titled-slide(
+  opensource-explain-title,
+  subtitle: [
+    #pause
+    Was ist das besondere daran?
+  ],
+)[
+
+]
+
 #three-column-slide("Warum Open Source Banger ist?")[
   #show: box.with(fill: green, width: 100%)
   #set align(bottom)
@@ -41,4 +65,58 @@
   #pause
   Small Test][Tiny Test]
 
-#three-bodied-column-slide("Warum Open Source Banger ist?", header-body[Some Header][Some Body], header-body[Some Header][Some Body], header-body[Some Header][Some Body])
+#three-bodied-column-slide(
+  "Warum Open Source Banger ist?",
+  header-body[Some Header][Some Body],
+  header-body[Some Header][
+    #show: block.with(height: 6cm)
+    #only("3-5")[#place(top + right, image("assets/linus-setup.png"))]
+  ],
+  header-body[Some Header][Some Body],
+)
+
+#side-content-slide(
+  "Was können wir tun?",
+  side-image: [
+    #only("-5")[idk]
+  ]
+)[
+  #let contents = (
+    [*Code*\ Bugs fixen, Dokumentation],
+    [*Corporate Voice*\ OSS-Sponsoring fördern],
+    [*Nutzen*\ Bewusste Tool-Wahl],
+    [*Spenden*\ Private Unterstützung],
+    [*Werben*\ Community vergrößern],
+  )
+  #let nodes() = {
+    for (index, content) in contents.enumerate() {
+      (
+        pause,
+        fletcher.node(
+          (0, index),
+          {
+            set text(fill: gray-0)
+            content
+          },
+          shape: fletcher.shapes.octagon,
+          stroke: gray-5,
+          fill: gray-4,
+          inset: 3mm
+        ),
+      )
+    }
+  }
+
+  #fletcher-diagram(
+    spacing: 6mm,
+    nodes(),
+  )
+]
+
+#quote-slide(
+  [
+    #set text(size: 26pt)
+    Open Source Software kann unsere Zukunft tragen, aber nicht ohne *Unterstützung*. Macht aus 'Open Source' heute ein '*Supported Source*'.
+  ],
+  attribution: "Euer Vortragender, Tim",
+)
