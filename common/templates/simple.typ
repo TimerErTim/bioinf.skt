@@ -1,12 +1,13 @@
 #import "@preview/touying:0.6.1": *
 
 #let simple-slides(
-  config-info: config-info(),
+  ..configs,
   body,
 ) = {
   show: touying-slides.with(
     config-page(
       paper: "presentation-16-9",
+      margin: 0pt,
     ),
     config-common(
       slide-fn: slide,
@@ -15,7 +16,7 @@
       zero-margin-footer: true,
       zero-margin-header: true,
     ),
-    config-info,
+    ..configs,
   )
 
   body
