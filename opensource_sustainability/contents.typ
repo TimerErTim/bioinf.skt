@@ -1,4 +1,8 @@
 #import "globals.typ": *
+#import "@preview/codly:1.3.0": *
+#import "@preview/suiji:0.5.1": *
+
+#show: codly-init.with()
 
 #default-focus-slide(
   config: config-page(
@@ -75,42 +79,43 @@
   header-body[Some Header][Some Body],
 )
 
+#let countermeasures-code = read("countermeasures-list.typ")
 #side-content-slide(
   "Was können wir tun?",
   side-image: [
-    #only("-5")[idk]
+    #show: align.with(top)
+    #only("7")[
+      #show: pad.with(1cm)
+      #let images = (
+        image("assets/typst-seeklogo.svg", height: 2.5cm),
+        image("assets/touying-removebg-preview.png", height: 2cm),
+        image("assets/pympress.png", height: 2.5cm),
+        image("assets/rust.png", height: 3cm),
+        image("assets/tinymist-logo.png", height: 2cm),
+        image("assets/nerd-fonts.png", height: 2cm),
+        image("assets/mise-logo.svg", height: 2.5cm),
+      )
+      #let rng = gen-rng-f(182390143865)
+      #let scatter-points = uniform(rng, size: 2 * images.len()).last().chunks(2)
+      
+      #for (image, (x, y)) in images.zip(scatter-points) {
+        layout(((width: con-w, height: con-h)) => {
+          let (width, height) = measure(image)
+          let (dx, dy) = (x * (con-w - width), y * (con-h - height))
+          place(left + top, dx: dx, dy: dy, image)
+        })
+      }
+    ]
+    #only("8")[
+      #codly-range(3)
+      #show raw: box.with(inset: 1cm, stroke: gray-5, radius: 6pt, outset: -8mm)
+      #raw(countermeasures-code, lang: "typst", block: true)
+      #place(right + horizon)[]
+    ]
   ]
 )[
-  #let contents = (
-    [*Code*\ Bugs fixen, Dokumentation],
-    [*Corporate Voice*\ OSS-Sponsoring fördern],
-    [*Nutzen*\ Bewusste Tool-Wahl],
-    [*Spenden*\ Private Unterstützung],
-    [*Werben*\ Community vergrößern],
-  )
-  #let nodes() = {
-    for (index, content) in contents.enumerate() {
-      (
-        pause,
-        fletcher.node(
-          (0, index),
-          {
-            set text(fill: gray-0)
-            content
-          },
-          shape: fletcher.shapes.octagon,
-          stroke: gray-5,
-          fill: gray-4,
-          inset: 3mm
-        ),
-      )
-    }
-  }
-
-  #fletcher-diagram(
-    spacing: 6mm,
-    nodes(),
-  )
+  #show: pad.with(x: 2cm)
+  #eval(countermeasures-code, mode: "markup")
 ]
 
 #quote-slide(
