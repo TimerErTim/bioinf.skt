@@ -87,7 +87,7 @@
   dy: -1cm,
   image("assets/sdgs.png", height: 6cm),
 )))[
-  open source software <...> that adhere to privacy and other applicable laws and best practices, do no harm, and help attain the SDGs
+  open source software ... that adhere to privacy and other applicable laws and best practices, do no harm, and help attain the SDGs
 
   #{
     show: only.with("2-")
@@ -111,17 +111,33 @@
   "Digital Public Goods",
   subcontent: [
     #cite(<src_dpgs-casestudy>, form: none)
-    Open Source Software ist maßgeblich für die Erreichung der Nachhaltigkeitsziele
+    #show: box.with(width: 10cm)
+    #set text(size: 18pt)
+    #let cur-color-index = state("sdg-list-col-index", 0)
+    #cur-color-index.update(0)
+    #set list(marker: it => context [
+      #let color = get-sdg-color(cur-color-index.get())
+      #cur-color-index.update(c => c + 1)
+      #set text(fill: color)
+      
+    ])
+    - Open standards
+    - Open source software
+    - Open content
+    - Open AI models
+    - Open data
+    - Open hardware
 
-    laut UN-Nachhaltigkeitsbericht 2023
+    #show: uncover.with("6-")
+    #image("assets/sdg-01.png", height: 4cm)
   ],
   frame-1: [
     #show: uncover.with("2-")
-    #show: frame-layout.with(sdg-logo: image("assets/sdg-04.png", height: 1cm))
+    #show: frame-layout.with(sdg-logo: image("assets/sdg-04.png", height: 1.5cm))
 
     #image("assets/moodle-logo.png", height: 1cm)
     #[
-      #set text(size: 60pt, weight: "bold")
+      #set text(size: 48pt, weight: "bold")
       60%
     ]
 
@@ -129,25 +145,47 @@
   ],
   frame-2: [
     #show: uncover.with("3-")
-    #show: frame-layout.with(sdg-logo: image("assets/sdg-08.png", height: 1cm))
     
-    M-PESA
+    #show: frame-layout.with(sdg-logo: image("assets/sdg-16.png", height: 1.5cm))
+    
+    #image("assets/mosip-logo.png", height: 2cm)
 
-    Mobile Payments
+    #[
+      #set text(size: 28pt, weight: "bold")
+      118 Mio.
+    ]
+
+    erfasste Personen in\
+    *27* Ländern
   ],
   frame-3: [
     #show: uncover.with("4-")
-    #show: frame-layout.with(sdg-logo: image("assets/sdg-16.png", height: 1cm))
-    MOSIP
+    #show: frame-layout.with(sdg-logo: image("assets/sdg-03.png", height: 1.5cm))
 
-    Digital Identity
+    #image("assets/dhis2-logo.png", height: 1.5cm)
+    #[
+      #set text(size: 28pt, weight: "bold")
+      3.2 Mrd.
+    ]
+
+    verwaltete Personen
+
+    *80+* Länder
   ],
   frame-4: [
     #show: uncover.with("5-")
-    #show: frame-layout.with(sdg-logo: image("assets/sdg-03.png", height: 1cm))
-    DHIS2
+    #show: frame-layout.with(sdg-logo: image("assets/sdg-08.png", height: 1.5cm))
+    
+    #image("assets/mpesa-logo.png", height: 1.5cm)
 
-    Health Management
+    #[
+      #set text(size: 28pt, weight: "bold")
+      125 Mrd.
+    ]
+
+    Transaktionen pro Jahr
+
+    *OpenShift/Linux* für *8k* TPS
   ],
 )
 
@@ -168,16 +206,18 @@
         image("assets/nerd-fonts.png", height: 2cm),
         image("assets/mise-logo.svg", height: 2.5cm),
         image("assets/jujutsu-logo.png", height: 1.5cm),
+        image("assets/gimp-logo.png", height: 1.5cm),
       )
       #let rng = gen-rng-f(182390143865)
       #let scatter-points = uniform(rng, size: 2 * images.len()).last().chunks(2)
-      #{scatter-points.last() = (0.6, 0.7)}
+      #{scatter-points.at(7) = (0.6, 0.7)}
+      #{scatter-points.at(8) = (0.9, 0.2)}
 
       #for (image, (x, y)) in images.zip(scatter-points) {
         layout(((width: con-w, height: con-h)) => {
           let (width, height) = measure(image)
           let (dx, dy) = (x * (con-w - width), y * (con-h - height))
-          place(left + top, dx: dx, dy: dy, image)
+          place(left + bottom, dx: dx, dy: dy, image)
         })
       }
     ]

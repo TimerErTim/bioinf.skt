@@ -48,13 +48,14 @@
   goal-17: rgb(19, 73, 107),
 )
 #let sdg-color-map = sdg-colors.values()
+#let get-sdg-color(index, offset: 0) = sdg-color-map.at(calc.rem(index + offset, sdg-color-map.len()))
 
 
 #let slides(handout: false, body) = {
   simple-slides(
     config-info(
       title: [Open Source Software],
-      subtitle: [Wie viel kann sie tragen?],
+      subtitle: [Wie viel Last kann sie tragen?],
       author: [Tim Peko],
       date: datetime(year: 2026, month: 1, day: 22),
       institution: [FH Hagenberg],
@@ -316,7 +317,7 @@
     let grids = (grid(
         columns: (1fr, auto),
         rows: (1fr,),
-        gutter: 1mm,
+        gutter: 2mm,
         frame-1,
         frame-2
       ), grid(
