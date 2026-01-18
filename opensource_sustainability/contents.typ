@@ -167,9 +167,11 @@
         image("assets/tinymist-logo.png", height: 2cm),
         image("assets/nerd-fonts.png", height: 2cm),
         image("assets/mise-logo.svg", height: 2.5cm),
+        image("assets/jujutsu-logo.png", height: 1.5cm),
       )
       #let rng = gen-rng-f(182390143865)
       #let scatter-points = uniform(rng, size: 2 * images.len()).last().chunks(2)
+      #{scatter-points.last() = (0.6, 0.7)}
 
       #for (image, (x, y)) in images.zip(scatter-points) {
         layout(((width: con-w, height: con-h)) => {
