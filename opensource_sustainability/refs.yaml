@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mkdjr/hayagriva/refs/heads/main/hayagriva.schema.json
+
 tanenbaum-2021:
   type: Book
   title: "Computer Networks"
@@ -19,4 +21,23 @@ dodag-figure:
       date: 2025-05-23
   date: 2011-09
 
- 
+src_sustainability-report:
+  type: report
+  title: Open Source for Sustainability
+  url:
+    value: https://www.linuxfoundation.org/research/open-source-sustainability
+    date: 2026-01-18
+  author:
+  - Kirsten D. Sandberg
+  serial-number:
+    doi: 10.70828/YVGI5647
+
+
+src_dpgs-casestudy:
+  type: report
+  url: https://digitallibrary.un.org/record/4012786?v=pdf
+  title: "Digital Public Goods for the SDGs : Emerging insights on sustainability, replicability & partnerships: five case studies / UNDP"
+  organization: UNDP
+  date: 2023
+  author:
+  - UNDP

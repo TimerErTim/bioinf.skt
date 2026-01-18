@@ -47,15 +47,26 @@
   ]
 ]))
 
-#let opensource-explain-title = "Was ist Open Source?"
 #titled-slide(
-  opensource-explain-title,
+  "Was ist Open Source?",
   subtitle: [
     #pause
     Was ist das besondere daran?
   ],
 )[
+  #cite(<src_sustainability-report>, form: none)
+]
 
+#quote-slide(attribution: "UN Secretary-General", config: config-page(background: place(bottom + left, dx: 1cm, dy: -1cm, image("assets/sdgs.png", height: 6cm))))[
+  open source software <...> that adhere to privacy and other applicable laws and best practices, do no harm, and help attain the SDGs
+
+  #pause
+  #place(top + left)[
+    #show: rotate.with(15deg, reflow: true)
+    #set text(size: 53pt, weight: "bold", fill: gradient.linear(..sdg-color-map))
+    #show: highlight.with(fill: gray-4, extent: 0.2em, stroke: gray-5)
+    Digital Public Goods
+  ]
 ]
 
 #three-column-slide("Warum Open Source Banger ist?")[
@@ -74,7 +85,7 @@
   header-body[Some Header][Some Body],
   header-body[Some Header][
     #show: block.with(height: 6cm)
-    #only("3-5")[#place(top + right, image("assets/linus-setup.png"))]
+    #only("3-5")[#place(right + top, image("assets/linus-setup.png"))]
   ],
   header-body[Some Header][Some Body],
 )
@@ -125,3 +136,10 @@
   ],
   attribution: "Euer Vortragender, Tim",
 )
+
+#titled-slide(
+  "Quellen"
+)[
+  #show: pad.with(x: 2cm)
+  #bibliography("refs.yaml", title: none)
+]

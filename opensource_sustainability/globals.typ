@@ -27,6 +27,29 @@
 #let fg-dark = gray-0
 #let fg-light = gray-5
 
+// SDG Colors
+#let sdg-colors = (
+  goal-1: rgb(229, 35, 61),
+  goal-2: rgb(221, 167, 58),
+  goal-3: rgb(76, 161, 70),
+  goal-4: rgb(197, 25, 45),
+  goal-5: rgb(239, 64, 44),
+  goal-6: rgb(39, 191, 230),
+  goal-7: rgb(251, 196, 18),
+  goal-8: rgb(163, 28, 68),
+  goal-9: rgb(242, 106, 45),
+  goal-10: rgb(224, 20, 131),
+  goal-11: rgb(248, 157, 42),
+  goal-12: rgb(191, 141, 44),
+  goal-13: rgb(64, 127, 70),
+  goal-14: rgb(31, 151, 212),
+  goal-15: rgb(89, 186, 72),
+  goal-16: rgb(18, 106, 159),
+  goal-17: rgb(19, 73, 107),
+)
+#let sdg-color-map = sdg-colors.values()
+
+
 #let slides(handout: false, body) = {
   simple-slides(
     config-info(
@@ -132,11 +155,11 @@
     },
   )[
     #box(inset: (bottom: 0pt, top: 2cm, x: 3cm))[
-      #set text(size: 30pt, weight: "regular")
-      #quote
       #set text(size: 100pt, fill: gray-2)
       #place(top + left, dx: -2cm, dy: -0.5cm, sym.quote.l)
       #place(bottom + right, dx: 2cm, dy: 2.25cm, sym.quote.r)
+      #set text(size: 30pt, weight: "regular", fill: gray-5)
+      #quote
     ]
   ]
 }
@@ -205,11 +228,12 @@
       it.header
 
       set text(fill: gray-0)
-      block(
+      box(
         inset: 2cm,
         width: 100%,
         fill: gray-4,
         it.body,
+        clip: true
       )
     }),
   )
