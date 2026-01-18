@@ -233,7 +233,7 @@
         width: 100%,
         fill: gray-4,
         it.body,
-        clip: true
+        clip: true,
       )
     }),
   )
@@ -248,10 +248,10 @@
   )
 }
 
-#let side-content-slide(
+#let sided-base-slide(
   title,
-  side-image: none,
-  main-content,
+  subcontent: none,
+  sidecontent: none,
   config: (:),
   repeat: auto,
 ) = {
@@ -259,28 +259,81 @@
     grid(
       columns: (auto, auto),
       gutter: 1.5cm,
-      {
-        show: box.with(height: 100%, width: 100%, fill: gray-1)
-        show: align.with(center + horizon)
-        place(right + horizon, dx: 1cm, rotate(90deg, polygon.regular(fill: gray-1, size: 1.5cm)))
-
-        side-image
-      },
-      {
-        show: align.with(center)
+      sidecontent,
+      grid.cell(x: 1, y: 0, {
+        show: align.with(left)
         show: pad.with(right: 1cm, bottom: 1cm)
 
         {
-          show: align.with(top + center)
+          show: align.with(top + right)
           show: pad.with(top: 2cm, bottom: 1cm)
           show: box.with(height: 2cm)
           show: upper
           set text(size: 24pt, weight: "bold")
+          set par(justify: false)
           title
         }
 
-        main-content
-      },
+        subcontent
+      }),
     )
+  })
+}
+
+#let side-content-slide(
+  title,
+  side-image: none,
+  main-content,
+  config: (:),
+  repeat: auto,
+) = {
+  sided-base-slide(
+    title,
+    subcontent: main-content,
+    sidecontent: {
+      show: box.with(height: 100%, width: 100%, fill: gray-1)
+      show: align.with(center + horizon)
+      place(right + horizon, dx: 1cm, rotate(90deg, polygon.regular(fill: gray-1, size: 1.5cm)))
+      side-image
+    },
+    config: config,
+    repeat: repeat,
+  )
+}
+
+#let four-side-frames-slide(
+  title,
+  subcontent: none,
+  frame-1: none,
+  frame-2: none,
+  frame-3: none,
+  frame-4: none,
+  config: (:),
+  repeat: auto,
+) = {
+  sided-base-slide(config: config, repeat: repeat, title, subcontent: subcontent, sidecontent: {
+    show: box.with(inset: (right: 0pt, rest: 1cm), width: 100%, height: 100%)
+    let grids = (grid(
+        columns: (1fr, auto),
+        rows: (1fr,),
+        gutter: 1mm,
+        frame-1,
+        frame-2
+      ), grid(
+        columns: (auto, 1fr),
+        rows: (1fr,),
+        gutter: 2mm,
+        frame-3,
+        frame-4,
+      )).map(it => {
+        set grid.cell(fill: gray-1, align: center)
+        it
+      })
+      grid(
+        rows: (1fr, 1fr),
+        gutter: 2mm,
+        ..grids,
+      )
+    
   })
 }

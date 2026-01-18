@@ -55,19 +55,10 @@
   ],
 )[
   #cite(<src_sustainability-report>, form: none)
+
+  96% aller Softwaresysteme haben eine kritische Komponente aus OSS
 ]
 
-#quote-slide(attribution: "UN Secretary-General", config: config-page(background: place(bottom + left, dx: 1cm, dy: -1cm, image("assets/sdgs.png", height: 6cm))))[
-  open source software <...> that adhere to privacy and other applicable laws and best practices, do no harm, and help attain the SDGs
-
-  #pause
-  #place(top + left)[
-    #show: rotate.with(15deg, reflow: true)
-    #set text(size: 53pt, weight: "bold", fill: gradient.linear(..sdg-color-map))
-    #show: highlight.with(fill: gray-4, extent: 0.2em, stroke: gray-5)
-    Digital Public Goods
-  ]
-]
 
 #three-column-slide("Warum Open Source Banger ist?")[
   #show: box.with(fill: green, width: 100%)
@@ -90,6 +81,77 @@
   header-body[Some Header][Some Body],
 )
 
+#quote-slide(attribution: [UN Generalsekretär], config: config-page(background: place(
+  bottom + left,
+  dx: 1cm,
+  dy: -1cm,
+  image("assets/sdgs.png", height: 6cm),
+)))[
+  open source software <...> that adhere to privacy and other applicable laws and best practices, do no harm, and help attain the SDGs
+
+  #{
+    show: only.with("2-")
+    place(top + left)[
+      #show: rotate.with(15deg, reflow: true)
+      #set text(size: 53pt, weight: "bold", fill: gradient.linear(..sdg-color-map))
+      #show: highlight.with(fill: gray-4, extent: 0.2em, stroke: gray-5)
+      Digital Public Goods
+    ]
+  }
+]
+
+#let frame-layout(body, sdg-logo: none) = {
+  place(left + top, sdg-logo, dx: 0.5cm, dy: 0.5cm)
+  show: align.with(center + bottom)
+  show: pad.with(0.5cm)
+  set par(spacing: 5mm, justify: true)
+  body
+}
+#four-side-frames-slide(
+  "Digital Public Goods",
+  subcontent: [
+    #cite(<src_dpgs-casestudy>, form: none)
+    Open Source Software ist maßgeblich für die Erreichung der Nachhaltigkeitsziele
+
+    laut UN-Nachhaltigkeitsbericht 2023
+  ],
+  frame-1: [
+    #show: uncover.with("2-")
+    #show: frame-layout.with(sdg-logo: image("assets/sdg-04.png", height: 1cm))
+
+    #image("assets/moodle-logo.png", height: 1cm)
+    #[
+      #set text(size: 60pt, weight: "bold")
+      60%
+    ]
+
+    Aller höheren Bildungseinrichtungen weltweit
+  ],
+  frame-2: [
+    #show: uncover.with("3-")
+    #show: frame-layout.with(sdg-logo: image("assets/sdg-08.png", height: 1cm))
+    
+    M-PESA
+
+    Mobile Payments
+  ],
+  frame-3: [
+    #show: uncover.with("4-")
+    #show: frame-layout.with(sdg-logo: image("assets/sdg-16.png", height: 1cm))
+    MOSIP
+
+    Digital Identity
+  ],
+  frame-4: [
+    #show: uncover.with("5-")
+    #show: frame-layout.with(sdg-logo: image("assets/sdg-03.png", height: 1cm))
+    DHIS2
+
+    Health Management
+  ],
+)
+
+
 #let countermeasures-code = read("countermeasures-list.typ")
 #side-content-slide(
   "Was können wir tun?",
@@ -108,7 +170,7 @@
       )
       #let rng = gen-rng-f(182390143865)
       #let scatter-points = uniform(rng, size: 2 * images.len()).last().chunks(2)
-      
+
       #for (image, (x, y)) in images.zip(scatter-points) {
         layout(((width: con-w, height: con-h)) => {
           let (width, height) = measure(image)
@@ -123,7 +185,7 @@
       #raw(countermeasures-code, lang: "typst", block: true)
       #place(right + horizon)[]
     ]
-  ]
+  ],
 )[
   #show: pad.with(x: 2cm)
   #eval(countermeasures-code, mode: "markup")
@@ -138,8 +200,9 @@
 )
 
 #titled-slide(
-  "Quellen"
+  "Quellen",
 )[
   #show: pad.with(x: 2cm)
-  #bibliography("refs.yaml", title: none)
+  #set text(size: 18pt)
+  #bibliography("refs.yaml", title: none, style: "copernicus")
 ]
