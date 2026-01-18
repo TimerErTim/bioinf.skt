@@ -47,39 +47,61 @@
   ]
 ]))
 
-#titled-slide(
+#three-bodied-column-slide(
   "Was ist Open Source?",
   subtitle: [
+    #cite(<src_sustainability-report>, form: none)
     #pause
-    Was ist das besondere daran?
+    Und was sind die Vorteile?
+
   ],
-)[
-  #cite(<src_sustainability-report>, form: none)
+  header-body[
+    #show: uncover.with("3-")
+    Transparenz
+  ][
+    #show: uncover.with("3-")
+    #show: align.with(center + horizon)
+    "Many eyes make all bugs shallow" (Linus' Law)
 
-  96% aller Softwaresysteme haben eine kritische Komponente aus OSS
-]
-
-
-#three-column-slide("Warum Open Source Banger ist?")[
-  #show: box.with(fill: green, width: 100%)
-  #set align(bottom)
-  #show: grid.cell.with(align: bottom, fill: red)
-  #pause
-  Big test
-][
-  #show: box.with(fill: blue, width: 100%)
-  #pause
-  Small Test][Tiny Test]
-
-#three-bodied-column-slide(
-  "Warum Open Source Banger ist?",
-  header-body[Some Header][Some Body],
-  header-body[Some Header][
-    #show: block.with(height: 6cm)
-    #only("3-5")[#place(right + top, image("assets/linus-setup.png"))]
+    #box(image("assets/tresor-glas.png"), stroke: gray-5, radius: 5%, clip: true, fill: gray-0)
   ],
-  header-body[Some Header][Some Body],
+  header-body[
+    #show: uncover.with("4-")
+    Demokratisierung
+  ][
+    #alternatives-cases(("4", "5", "6-"), case => {
+      let image = image("assets/linus-setup.png", width: if case != 2 { 20cm } else { auto })
+
+      if case == 2 {
+        show: align.with(horizon)
+        show: box.with(radius: 5%, clip: true)
+        image
+      } else {
+        place(top + left, dx: -7cm, dy: -5cm, box(clip: case == 0, width: 11cm, image))
+      }
+    })
+  ],
+  header-body[
+    #show: uncover.with("6-")
+    Kosteneffizienz
+  ][
+    #show: uncover.with("6-")
+    #[
+      #set text(size: 22pt, weight: "bold")
+      #sym.tilde\70 Mrd. € Wertschöpfung\
+      #set text(size: 11pt)
+      jährlich in der EU
+    ]
+
+    #[
+      #set text(size: 22pt, weight: "bold")
+      ~96% OSS\
+      #set text(size: 11pt)
+      als maßgebliche Komponente
+    ]
+  ],
 )
+
 
 #quote-slide(attribution: [UN Generalsekretär], config: config-page(background: place(
   bottom + left,
@@ -145,9 +167,9 @@
   ],
   frame-2: [
     #show: uncover.with("3-")
-    
+
     #show: frame-layout.with(sdg-logo: image("assets/sdg-16.png", height: 1.5cm))
-    
+
     #image("assets/mosip-logo.png", height: 2cm)
 
     #[
@@ -175,7 +197,7 @@
   frame-4: [
     #show: uncover.with("5-")
     #show: frame-layout.with(sdg-logo: image("assets/sdg-08.png", height: 1.5cm))
-    
+
     #image("assets/mpesa-logo.png", height: 1.5cm)
 
     #[
@@ -189,10 +211,35 @@
   ],
 )
 
+#titled-slide("Womit hat OSS zu kämpfen?")[
+  #cite(<src_log4shell>, form: none)
+  #let annotate(..args) = {
+    box(place(bottom + left, ..args))
+    h(0pt, weak: false)
+  }
+
+  #show: pad.with(top: 0cm, rest: 2cm)
+  #let tailwind-fire = {
+    image("assets/tailwindcss.png", width: 10cm)
+    box(place(top + left, image("assets/fire-effect.png", height: 7cm, width: 15cm), dx: -2cm, dy: -7cm))
+  }
+  #pause
+  #move(tailwind-fire, dy: 3cm, dx: 30%)
+]
+
+#master-slide[
+  #{
+    show: align.with(center + horizon)
+    show: box.with(inset: 2cm, stroke: gray-4, radius: 3%, outset: -2cm, clip: true)
+
+    image("assets/christian-grobmeier.png", width: 100%)
+    place(top + left, dx: 1cm, dy: 2cm, image("assets/log4j-logo.png", width: 12cm))
+  }
+]
 
 #let countermeasures-code = read("countermeasures-list.typ")
 #side-content-slide(
-  "Was können wir tun?",
+  "Wie können wir helfen?",
   side-image: [
     #show: align.with(top)
     #only("7")[
@@ -210,8 +257,8 @@
       )
       #let rng = gen-rng-f(182390143865)
       #let scatter-points = uniform(rng, size: 2 * images.len()).last().chunks(2)
-      #{scatter-points.at(7) = (0.6, 0.7)}
-      #{scatter-points.at(8) = (0.9, 0.2)}
+      #{ scatter-points.at(7) = (0.6, 0.7) }
+      #{ scatter-points.at(8) = (0.9, 0.2) }
 
       #for (image, (x, y)) in images.zip(scatter-points) {
         layout(((width: con-w, height: con-h)) => {

@@ -52,6 +52,7 @@
 
 
 #let slides(handout: false, body) = {
+  set text(lang: "de")
   simple-slides(
     config-info(
       title: [Open Source Software],
@@ -190,17 +191,19 @@
 }
 
 #let three-column-slide(
-  header,
+  title,
+  subtitle: none,
   column-1,
   column-2,
   column-3,
   config: (:),
   repeat: auto,
 ) = {
-  titled-slide(config: config, repeat: repeat, header, {
+  titled-slide(config: config, repeat: repeat, title, subtitle: subtitle, {
     show: pad.with(x: 2cm)
     grid(
       columns: (1fr, 1fr, 1fr),
+      rows: (1fr,),
       align: center,
       gutter: 1cm,
       column-1, column-2, column-3,
@@ -216,37 +219,38 @@
 }
 
 #let three-bodied-column-slide(
-  header,
+  title,
+  subtitle: none,
   column-1,
   column-2,
   column-3,
   config: (:),
   repeat: auto,
 ) = {
-  let (column-1, column-2, column-3) = (column-1, column-2, column-3).map(
-    it => grid.cell(align: bottom, {
-      v(1fr)
-      it.header
-
-      set text(fill: gray-0)
-      box(
-        inset: 2cm,
-        width: 100%,
-        fill: gray-4,
-        it.body,
-        clip: true,
-      )
-    }),
-  )
-
-  three-column-slide(
-    repeat: repeat,
-    config: config,
-    header,
-    column-1,
-    column-2,
-    column-3,
-  )
+  titled-slide(config: config, repeat: repeat, title, subtitle: subtitle, {
+    show: pad.with(x: 2cm)
+    v(1fr)
+    grid(
+      columns: (1fr, 1fr, 1fr),
+      rows: (auto, auto),
+      align: center,
+      gutter: 1cm,
+      ..for (idx, col) in (column-1, column-2, column-3).enumerate() {
+        (
+          grid.cell(y: 0, x: idx, {
+            show: move.with(dy: 1.5cm)
+            show: box.with(stroke: gray-5, fill: gray-0, inset: 3mm, radius: 100%)
+            set text(size: 16pt, weight: "bold")
+            col.header
+          }),
+          grid.cell(y: 1, x: idx, inset: 1cm, fill: gray-4, {
+            set text(fill: gray-0)
+            col.body
+          }),
+        )
+      },
+    )
+  })
 }
 
 #let sided-base-slide(
@@ -314,27 +318,27 @@
 ) = {
   sided-base-slide(config: config, repeat: repeat, title, subcontent: subcontent, sidecontent: {
     show: box.with(inset: (right: 0pt, rest: 1cm), width: 100%, height: 100%)
-    let grids = (grid(
+    let grids = (
+      grid(
         columns: (1fr, auto),
         rows: (1fr,),
         gutter: 2mm,
-        frame-1,
-        frame-2
-      ), grid(
+        frame-1, frame-2,
+      ),
+      grid(
         columns: (auto, 1fr),
         rows: (1fr,),
         gutter: 2mm,
-        frame-3,
-        frame-4,
-      )).map(it => {
-        set grid.cell(fill: gray-1, align: center)
-        it
-      })
-      grid(
-        rows: (1fr, 1fr),
-        gutter: 2mm,
-        ..grids,
-      )
-    
+        frame-3, frame-4,
+      ),
+    ).map(it => {
+      set grid.cell(fill: gray-1, align: center)
+      it
+    })
+    grid(
+      rows: (1fr, 1fr),
+      gutter: 2mm,
+      ..grids,
+    )
   })
 }

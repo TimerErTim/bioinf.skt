@@ -20,3 +20,12 @@ src_dpgs-casestudy:
   date: 2023
   author:
   - UNDP
+
+src_log4shell:
+  type: report
+  url: https://github.blog/open-source/inside-the-breach-that-broke-the-internet-the-untold-story-of-log4shell/
+  title: "Inside the breach that broke the internet: The untold story of Log4Shell"
+  organization: GitHub
+  date: 2025-10-20
+  author:
+  - Gregg Cochran
