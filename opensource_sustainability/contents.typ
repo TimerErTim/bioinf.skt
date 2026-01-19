@@ -232,8 +232,8 @@
     show: align.with(center + horizon)
     show: box.with(inset: 2cm, stroke: gray-4, radius: 3%, outset: -2cm, clip: true)
 
-    image("assets/christian-grobmeier.png", width: 100%)
-    place(top + left, dx: 1cm, dy: 2cm, image("assets/log4j-logo.png", width: 12cm))
+    image("assets/christian-grobmeier.png", height: 100%)
+    place(top + left, dx: 1cm, dy: 2cm, image("assets/log4j-logo.png", width: 11cm))
   }
 ]
 
